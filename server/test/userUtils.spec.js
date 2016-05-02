@@ -6,40 +6,24 @@ let should = require('should')
 let request = require('request')
 let exec = require('child_process').exec
 let testUtils = require('./testUtils.js');
+let connection = 'postgres://localhost:4000/testdb'
 
 // Tell chai that we'll be using the "expect" style assertions.
 
 describe('userUtils', () => {
 
-  // Connect to database before any tests
+  // create and connect to database before any tests
   before((done) => {
     testUtils.prepareDb;
+    pg.connect(connection);
   });
   after((done) => {
     testUtils.cleanDB;
   })
 
   beforeEach( (done) => {
-      // TODO: Seed database with some jobs to run tests against. 
-    clearDB( () => {
-      var jobs = [
-        {
-          name: 'Cat Sitter',
-          salary: 36000
-        },
-        {
-          name: 'Expert Cat Sitter',
-          salary: 200000
-        },
-        {
-          name: 'Developer',
-          salary: 120000
-        },
-        {
-          name: 'Sign Holder',
-          salary: 36000
-        }
-      ];
+      // TODO: Seed database with some users to run tests against. 
+    pg.insert()
     // See http://mongoosejs.com/docs/models.html for details on the `create` method
       Job.make(jobs, done);
   
