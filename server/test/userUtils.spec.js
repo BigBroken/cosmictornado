@@ -28,7 +28,6 @@ describe('userUtils', () => {
       Job.make(jobs, done);
   
     });
-  });
 
   // TODO: Write your tests for jobController here
   it('should have a method that given a new user, adds a user to the database', (done) => {
@@ -57,6 +56,5 @@ describe('userUtils', () => {
       done();
     });
   });
-
 
 });
