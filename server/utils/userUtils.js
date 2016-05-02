@@ -1,10 +1,11 @@
 var pg = require('pg');
 var connectionString = require('../config/dbconfig');
 
-module.exports = ((req, res) => {
+module.exports = ((req, res, connection = connectionString) => {
+  
   var userUtils = {
     newUser: (req, res) => {
-      pg.connect(connectionString, (err, client, done) => {
+      pg.connect(connection, (err, client, done) => {
         // Handle connection errors
         if (err) {
           done();
@@ -38,7 +39,7 @@ module.exports = ((req, res) => {
       });
     },
     allUsers: (req, res) => {
-      pg.connect(connectionString, (err, client, done) => {
+      pg.connect(connection, (err, client, done) => {
         // Handle connection errors
         if (err) {
           done();
